@@ -7,7 +7,7 @@ def home(request):
         <html>
             <head><title>Django Test</title></head>
             <body>
-                <h1>Hello, Django works!</h1>
+                <h1>Hello, Django works for deployment!</h1>
                 <p>Date actuelle : {now}</p>
             </body>
         </html>
