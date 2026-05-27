@@ -1,14 +1,22 @@
-from django.http import HttpResponse
-from datetime import datetime
+from django.shortcuts import render, redirect
+from .models import Personne
 
 def home(request):
-    now = datetime.now()
-    return HttpResponse(f"""
-        <html>
-            <head><title>Django Test</title></head>
-            <body>
-                <h1>Hello, Django works for deployment!, Gunicorn</h1>
-                <p>Date actuelle : {now}</p>
-            </body>
-        </html>
-    """)
+    
+    if request.method == "POST":
+        nom = request.POST.get("nom")
+        prenom = request.POST.get("prenom")
+
+        if nom and prenom:
+            Personne.objects.create(
+                nom=nom,
+                prenom=prenom
+            )
+
+        return redirect("home")
+
+    personnes = Personne.objects.all().order_by("-created_at")
+
+    return render(request, "home.html", {
+        "personnes": personnes
+    })

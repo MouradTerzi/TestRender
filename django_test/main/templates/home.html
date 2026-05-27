@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Django PostgreSQL Test</title>
+</head>
+<body>
+
+    <h1>Ajout de personnes</h1>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <input type="text" name="prenom" placeholder="Prénom" required>
+        <input type="text" name="nom" placeholder="Nom" required>
+
+        <button type="submit">Ajouter</button>
+    </form>
+
+    <hr>
+
+    <h2>Liste des personnes</h2>
+
+    <ul>
+        {% for personne in personnes %}
+            <li>
+                {{ personne.prenom }} {{ personne.nom }}
+            </li>
+        {% empty %}
+            <li>Aucune personne enregistrée.</li>
+        {% endfor %}
+    </ul>
+
+</body>
+</html>
